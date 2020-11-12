@@ -19,11 +19,19 @@ class Router(object):
             )
         )
 
-
 class Graph(object):
+    def __init__(self):
+        self.routers = {}
+
+    def add_router_if_new(self, name):
+        if name not in self.routers:
+            self.routers[name] = _Router(name);
+
     def add_router(self, start, end, cost):
-        pass
-        
+        self.add_router_if_new(start)
+        self.add_router_if_new(end)
+        self.routers[start].add_edge(self.routers[end], cost)
+
 def main():
     graph = Graph()
     graph.add_router("a", "b", 7)
