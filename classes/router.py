@@ -8,6 +8,10 @@ class Router(object):
         self.name=name
         self.routes = RoutingTable()
 
+    def add_edge(self, to, cost):
+        self.routes.add_route(self, to, cost)
+        to.routes.add_route(self, to, cost)
+
     def get_path(self, to):
         return self.routes[to]
 
