@@ -2,7 +2,10 @@
 
 class RoutingTable(object):
     def __init__(self):
-        self.routes = []
+        self.routes = {}
+
+    def __getitem__(self, index):
+        return self.routes[index]
 
 def main():
     pass
