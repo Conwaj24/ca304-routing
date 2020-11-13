@@ -10,7 +10,6 @@ class Router(object):
 
     def add_edge(self, to, cost):
         self.routes.add_route(self, to, cost)
-        to.routes.add_route(self, to, cost)
 
     def get_path(self, to):
         return self.routes[to]
