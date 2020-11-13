@@ -57,6 +57,11 @@ class Route(object):
         self.cost += other.cost
         assert(self.is_valid)
         return self
+    def __gt__(self, other):
+        return int(self) > int(other)
+    def __lt__(self, other):
+        return int(self) < int(other)
+
 
 def main():
     pass
