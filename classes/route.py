@@ -40,7 +40,7 @@ class Route(object):
         return True
 
     def __str__(self):
-        return "->".join(self.path)
+        return "->".join([str(e) for e in self.path])
     def __repr__(self):
         return str(self)
     def __int__(self):
