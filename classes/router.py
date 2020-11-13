@@ -3,10 +3,10 @@
 from classes.routing_table import RoutingTable
 
 class Router(object):
-    NAMETYPE = str
-    def __init__(self, name: NAMETYPE):
+    def __init__(self, name):
         self.name=name
         self.routes = RoutingTable()
+        self.add_edge(self, 0)
 
     def add_edge(self, to, cost):
         self.routes.add_route(self, to, cost)

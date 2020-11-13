@@ -15,9 +15,7 @@ class RoutingTable(object):
             self.routes[routekey] = route
 
     def add_route(self, *args, cost=None):
-        route = Route(*args)
-        if cost:
-            route.cost = cost
+        route = Route(*args, cost=cost)
         self._store_route(route)
 
     def __getitem__(self, index):
