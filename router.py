@@ -6,7 +6,7 @@ class Router(object):
     def __init__(self, name, graph):
         self.name = name
         self.graph = graph
-        self.rtr = self.graph.get_router(name)
+        self.rtr = graph.get_router(name)
         pass
 
     def get_path(self, router_name):

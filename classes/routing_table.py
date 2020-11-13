@@ -8,7 +8,7 @@ class RoutingTable(object):
 
     def _store_route(self, route):
         routekey = route[0].name
-        if (    routekey in self.routes and 
+        if (    routekey not in self.routes or 
                 route.cost and
                 route.cost < self.routes[routekey]
         ):
