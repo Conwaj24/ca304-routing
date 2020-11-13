@@ -4,9 +4,8 @@ class Route(object):
     def __init__(self, *routers_in_path, cost=None):
         self.path = routers_in_path
         self.subroutes = []
-        if cost:
-            self.cost = cost
-        else:
+        self.cost = cost
+        if not cost:
             self.calculate(routers_in_path)
 
     def calculate(self, *routers_in_path):
@@ -30,6 +29,8 @@ class Route(object):
 
     def is_valid(self):
         """return true if all of the subroutes connect together"""
+        if not self.cost:
+            return False
         if not self.is_edge():
             prev - self.subroutes[0]
             for route in self.subroutes[1:]:

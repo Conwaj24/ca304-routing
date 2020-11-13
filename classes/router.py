@@ -14,6 +14,11 @@ class Router(object):
     def get_path(self, to):
         return self.routes[to]
 
+    def __str__(self):
+        return self.name
+    def __repr__(self):
+        return str(self)
+
 def main():
     pass
 
