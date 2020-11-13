@@ -9,15 +9,13 @@ class Router(object):
         self.add_edge(self, 0)
 
     def add_edge(self, to, cost):
-        self.routes.add_route(self, to, cost)
+        self.routes.add_route(self, to, cost=cost)
 
     def get_path(self, to):
         return self.routes[to]
 
     def __str__(self):
         return self.name
-    def __repr__(self):
-        return str(self)
 
 def main():
     pass
