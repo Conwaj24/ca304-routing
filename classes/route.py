@@ -5,10 +5,11 @@ class Route(object):
         self.path = routers_in_path
         self.subroutes = []
         self.cost = cost
-        if not cost:
+        if cost is None:
             self.calculate(routers_in_path)
 
     def calculate(self, *routers_in_path):
+        print("calc")
         if len(routers_in_path) > 1:
             self += (
                     routers_in_path[0].get_path(routers_in_path[1]) +
@@ -26,6 +27,20 @@ class Route(object):
 
     def is_edge(self):
         return not self.subroutes
+
+    def clean_dups(self):
+        if not self.is_edge():
+            inds = {}
+            i = 0
+            while i < len(self.path):
+                if self.path[i].name not in inds:
+                    inds[self.path[i].name] = i
+                else:
+                    j = inds[self.path[i].name]
+                    self.path = self.path[:j+1] + self.path[i+1:]
+                    print(self.path)
+                    i = j
+                i += 1
 
     def is_valid(self):
         """return true if all of the subroutes connect together"""
@@ -50,7 +65,7 @@ class Route(object):
     def __getitem__(self, index):
         return self.path[index]
     def __add__(self, other):
-        return Route(self.path + other.path)
+        return Route(*self.path, *other.path)
     def __iadd__(self, other):
         self.path += other.path
         self.subroutes += other.subroutes

@@ -35,6 +35,9 @@ class Graph(object):
         self.add_router(end)
         self.routers[start].add_edge(self.routers[end], cost)
 
+def get_route(graph, a, b):
+    return graph.get_router(a).get_path(b)
+
 def main():
     graph = Graph()
     graph.add_edge("a", "b", 7)
@@ -48,6 +51,12 @@ def main():
     graph.add_edge("e", "f", 9)
     router = Router("a", graph)
     router.get_path("f")
+
+    dup_route = get_route(graph, "a", "b") + get_route(graph, "b", "c") + get_route(graph, "c", "d") + get_route(graph, "d", "e")
+    print(dup_route)
+    print(dup_route.is_edge())
+    dup_route.clean_dups()
+    print(dup_route)
 
 if __name__ == "__main__":
     main()
