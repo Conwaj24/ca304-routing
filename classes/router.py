@@ -5,16 +5,17 @@ from classes.routing_table import RoutingTable
 class Router(object):
     def __init__(self, name):
         self.name=name
-        self.routes = RoutingTable()
+        self.routing_table = RoutingTable()
         self.add_edge(self, 0)
+        #self.routing_table.explore()
 
     def add_edge(self, to, cost):
-        self.routes.add_route(self, to, cost=cost)
+        self.routing_table.add_route(self, to, cost=cost)
 
     def get_path(self, to):
         if isinstance(to, Router):
-            return self.routes[to.name]
-        return self.routes[to]
+            return self.routing_table[to.name]
+        return self.routing_table[to]
 
     def __str__(self):
         return self.name
@@ -26,4 +27,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
