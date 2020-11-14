@@ -50,6 +50,7 @@ def main():
     graph.add_edge("d", "e", 6)
     graph.add_edge("e", "f", 9)
     router = Router("a", graph)
+    router.rtr.routing_table.explore()
     router.get_path("f")
 
     dup_route = get_route(graph, "a", "b") + get_route(graph, "b", "c") + get_route(graph, "c", "d") + get_route(graph, "d", "e")
