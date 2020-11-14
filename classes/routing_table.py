@@ -6,17 +6,16 @@ class RoutingTable(object):
     def __init__(self):
         self.routes = {}
 
-    def _store_route(self, route):
+    def route_is_good(self, route):
         routekey = route[-1].name
-        if (    routekey not in self.routes or 
+        return (routekey not in self.routes or
                 route.cost and
-                route.cost < self.routes[routekey]
-        ):
-            self.routes[routekey] = route
+                route.cost < self.routes[routekey])
 
     def add_route(self, *args, cost=None):
         route = Route(*args, cost=cost)
-        self._store_route(route)
+        if self.route_is_good(route):
+            self.routes[route[-1].name] = route
 
     def __getitem__(self, index):
         return self.routes[index]
