@@ -39,7 +39,10 @@ class RoutingTable(object):
     def __getitem__(self, index):
         return self.routes[index]
     def __str__(self):
-        return str(self.routes)
+        data=[["","from","to","cost","path"]]+[[len(self.iterable),route[0],route[-1],route.cost,route] for route in self][::-1]
+        fmtstr="".join(["{:>"+str(i+1)+"}" for i in [max(col) for col in [[len(str(row[i])) for row in data] for i in range(len(data[0]))]]])
+        return "\n".join([fmtstr.format(*[str(e) for e in row]) for row in data])
+
     def __repr__(self):
         return str(self)
     def __iter__(self):

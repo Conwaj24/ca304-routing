@@ -19,6 +19,9 @@ class Router(object):
             )
         )
 
+    def print_routing_table(self):
+        print(self.rtr.routing_table)
+
 class Graph(object):
     def __init__(self):
         self.routers = {}
@@ -52,9 +55,12 @@ def main():
     router = Router("a", graph)
     router.rtr.routing_table.explore()
     router.get_path("f")
+    router.get_path("e")
 
     dup_route = get_route(graph, "a", "b") + get_route(graph, "b", "c") + get_route(graph, "c", "d") + get_route(graph, "d", "e")
     print(dup_route)
+
+    router.print_routing_table()
 
 if __name__ == "__main__":
     main()
