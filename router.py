@@ -54,9 +54,6 @@ def main():
 
     dup_route = get_route(graph, "a", "b") + get_route(graph, "b", "c") + get_route(graph, "c", "d") + get_route(graph, "d", "e")
     print(dup_route)
-    print(dup_route.is_edge())
-    dup_route.clean_dups()
-    print(dup_route)
 
 if __name__ == "__main__":
     main()
