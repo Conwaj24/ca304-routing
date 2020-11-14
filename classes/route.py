@@ -7,15 +7,14 @@ class Route(object):
         self.cost = cost
         if cost is None:
             self.calculate(routers_in_path)
+        assert(self.is_valid())
 
-    def calculate(self, *routers_in_path):
+    def calculate(self, routers_in_path):
         if len(routers_in_path) > 1:
-            self.subroutes.append(
-                    routers_in_path[0].get_path(routers_in_path[1]), 
-                    Route(routers_in_path[1:])
-            )
-            self.cost = sum(self.subroutes)
-            print(self.cost)
+            self.subroutes.append( routers_in_path[0].get_path(routers_in_path[1]))
+        if len(routers_in_path) > 2:
+            self.subroutes.append( Route(*routers_in_path[1:]))
+        self.cost = sum([int(r) for r in self.subroutes])
 
     def invert(self):
         self.calculate(*self.path[::-1])
@@ -23,7 +22,7 @@ class Route(object):
     def get_cost(self, arg=None):
         if arg is None:
             return self.cost
-        if arg is int:
+        if isinstance(arg, int):
             return
 
     def is_edge(self):
@@ -39,16 +38,15 @@ class Route(object):
                 else:
                     j = inds[self.path[i].name]
                     self.path = self.path[:j+1] + self.path[i+1:]
-                    print(self.path)
                     i = j
                 i += 1
 
     def is_valid(self):
         """return true if all of the subroutes connect together"""
-        if not self.cost:
+        if self.cost is None:
             return False
         if not self.is_edge():
-            prev - self.subroutes[0]
+            prev = self.subroutes[0]
             for route in self.subroutes[1:]:
                 if prev[-1] != route[0]:
                     return False

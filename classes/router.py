@@ -12,6 +12,8 @@ class Router(object):
         self.routes.add_route(self, to, cost=cost)
 
     def get_path(self, to):
+        if isinstance(to, Router):
+            return self.routes[to.name]
         return self.routes[to]
 
     def __str__(self):
