@@ -12,10 +12,16 @@ class RoutingTable(object):
                 route.cost and
                 route.cost < self.routes[routekey])
 
+    def store_route(self, route):
+        self.routes[route[-1].name] = route
+
+    def store_route_if_good(self, route):
+        if self.route_is_good(route):
+            self.store_route(route)
+
     def add_route(self, *args, cost=None):
         route = Route(*args, cost=cost)
-        if self.route_is_good(route):
-            self.routes[route[-1].name] = route
+        self.store_route_if_good(route)
 
     def __getitem__(self, index):
         return self.routes[index]
