@@ -9,12 +9,13 @@ class Route(object):
             self.calculate(routers_in_path)
 
     def calculate(self, *routers_in_path):
-        print("calc")
         if len(routers_in_path) > 1:
-            self += (
-                    routers_in_path[0].get_path(routers_in_path[1]) +
+            self.subroutes.append(
+                    routers_in_path[0].get_path(routers_in_path[1]), 
                     Route(routers_in_path[1:])
             )
+            self.cost = sum(self.subroutes)
+            print(self.cost)
 
     def invert(self):
         self.calculate(*self.path[::-1])
@@ -66,12 +67,6 @@ class Route(object):
         return self.path[index]
     def __add__(self, other):
         return Route(*self.path, *other.path)
-    def __iadd__(self, other):
-        self.path += other.path
-        self.subroutes += other.subroutes
-        self.cost += other.cost
-        assert(self.is_valid)
-        return self
     def __gt__(self, other):
         return int(self) > int(other)
     def __lt__(self, other):
