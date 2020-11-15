@@ -26,6 +26,9 @@ class RoutingTable(object):
         route = Route(*args, cost=cost)
         self.store_route_if_good(route)
 
+    def is_valid(self):
+        return all(route.is_valid() for route in self]
+
     def explore_route(self, route, force=False):
         if force or self.route_is_good(route):
             self.store_route_if_good(route)
@@ -36,9 +39,14 @@ class RoutingTable(object):
         for route in self:
             self.explore_route(route, force=True)
 
+    def selftest(self):
+        if not self.is_valid():
+            self.explore()
+
     def __getitem__(self, index):
         return self.routes[index]
     def __str__(self):
+        #It's beautiful, isn't it? :')
         data=[["","from","to","cost","path"]]+[[len(self.iterable),route[0],route[-1],route.cost,route] for route in self][::-1]
         fmtstr="".join(["{:>"+str(i+1)+"}" for i in [max(col) for col in [[len(str(row[i])) for row in data] for i in range(len(data[0]))]]])
         return "\n".join([fmtstr.format(*[str(e) for e in row]) for row in data])
