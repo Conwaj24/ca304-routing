@@ -27,7 +27,7 @@ class RoutingTable(object):
         self.store_route_if_good(route)
 
     def is_valid(self):
-        return all(route.is_valid() for route in self]
+        return all([route.is_valid() for route in self])
 
     def explore_route(self, route, force=False):
         if force or self.route_is_good(route):
@@ -47,9 +47,7 @@ class RoutingTable(object):
         return self.routes[index]
     def __str__(self):
         #It's beautiful, isn't it? :')
-        data=[["","from","to","cost","path"]]+[[len(self.iterable),route[0],route[-1],route.cost,route] for route in self][::-1]
-        fmtstr="".join(["{:>"+str(i+1)+"}" for i in [max(col) for col in [[len(str(row[i])) for row in data] for i in range(len(data[0]))]]])
-        return "\n".join([fmtstr.format(*[str(e) for e in row]) for row in data])
+        return(lambda d:(lambda d,f:"\n".join([f.format(*[str(e)for e in r])for r in d]))(d,"".join(["{:>"+str(i+1)+"}"for i in [max(col)for col in[[len(str(row[i]))for row in d]for i in range(len(d[0]))]]])))([["","from","to","cost","path"]]+[[len(self.iterable),r[0],r[-1],r.cost,r]for r in self][::-1])
 
     def __repr__(self):
         return str(self)
