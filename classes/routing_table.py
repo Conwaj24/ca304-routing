@@ -47,7 +47,7 @@ class RoutingTable(object):
         return self.routes[index]
     def __str__(self):
         #It's beautiful, isn't it? :')
-        return(lambda d:(lambda d,f:"\n".join([f.format(*[str(e)for e in r])for r in d]))(d,"".join(["{:>"+str(i+1)+"}"for i in [max(col)for col in[[len(str(row[i]))for row in d]for i in range(len(d[0]))]]])))([["","from","to","cost","path"]]+[[len(self.iterable),r[0],r[-1],r.cost,r]for r in self][::-1])
+        return(lambda d:(lambda d,f:"\n".join([f.format(*[str(e)for e in r])for r in d]))(d,"".join(["{:>"+str(i+1)+"}"for i in [max(c)for c in[[len(str(r[i]))for r in d]for i in range(len(d[0]))]]])))([["","from","to","cost","path"]]+[[len(self.iterable),r[0],r[-1],r.cost,r]for r in self][::-1])
 
     def __repr__(self):
         return str(self)
