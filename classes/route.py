@@ -23,12 +23,6 @@ class Route(object):
                 cost=(self.cost if self.is_edge() else None)
             )
 
-    def get_cost(self, arg=None):
-        if arg is None:
-            return self.cost
-        if isinstance(arg, int):
-            return
-
     def is_edge(self):
         return not self.subroutes
 
